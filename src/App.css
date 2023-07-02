@@ -10,3 +10,7 @@ body {
 .bg_pink {
     background-color: #C47C7C;
 }
+
+.w_400 {
+    width: 450px;
+}

@@ -21,7 +21,7 @@ const Search = () => {
         />
         <button className='rounded-e-full bg_pink p-2 w-20 flex items-center justify-center'> <BsSearch className='text-black text-2xl' /></button>
       </div >
-      <p className='container mx-auto text-gray-300 mb-40 mt-4 pl-10'>*Search on title name or date</p>
+      <p className='container mx-auto text-gray-300 mb-40 mt-4 pl-10'>*Search on title</p>
 
       <PostList sQuery={sQuery} />
     </div>

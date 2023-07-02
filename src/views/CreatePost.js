@@ -70,7 +70,6 @@ const CreatePost = () => {
         if (snapshot.exists()) {
             setForm({ ...snapshot.data() })
         }
-        // navigate('/')
     }
 
 
@@ -92,7 +91,7 @@ const CreatePost = () => {
                         ...form,
                         timestamp: serverTimestamp(),
                     })
-                    toast.success('The post was successfylly updated!')
+                    toast.success('The post was successfylly created!')
                     navigate(-1)
 
                 } catch (err) {
@@ -104,7 +103,7 @@ const CreatePost = () => {
                         ...form,
                         timestamp: serverTimestamp(),
                     })
-                    toast.success('The post was successfully created!')
+                    toast.success('The post was successfully updated!')
                     navigate(-1)
 
                 } catch (err) {
@@ -174,6 +173,7 @@ const CreatePost = () => {
                             <div className='flex flex-col gap-1'>
                                 <label htmlFor="file">Image</label>
                                 <input
+                                    accept="image/png,image/jpeg"
                                     onChange={(e) => setFile(e.target.files[0])}
                                     type="file"
                                     className='bg-white rounded p-4 h-36'
@@ -184,8 +184,12 @@ const CreatePost = () => {
                         {error && <span className='text-red-500 mt-4'>Post must contain a title and a first paragraph.</span>}
                         <button
                             disabled={progress !== null && progress < 100}
-                            className='hover:text-gray-500 hover:bg-white border border-3 rounded hover:border-gray-400 p-3 w-60 mt-6 border-indigo-500 bg-indigo-500 text-white'>
-                            {id ? 'Update' : 'Post'}
+                            className={
+                                progress !== null && progress < 100 ? 'text-gray-500 bg-white border border-3 rounded border-gray-400 p-3 w-60 mt-6'
+                                    : 'hover:text-gray-500 hover:bg-white border border-3 rounded hover:border-gray-400 p-3 w-60 mt-6 border-indigo-500 bg-indigo-500 text-white'
+                            }>
+                            {progress !== null && progress < 100 && 'waiting on '}
+                            { id ? 'Update' : 'Post'}
                         </button>
                     </form>
                 </div>

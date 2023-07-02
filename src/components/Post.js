@@ -40,17 +40,21 @@ const Post = ({ post, handleDelete }) => {
     return (
         <div className='mb-60 flex flex-col'>
             <div key={post.id} className='bg-white px-40 max-h-fit place-content-end w-full flex flex-col rounded-xl container mx-auto'>
-                <div className='flex flex-row items-bottom gap-20 bg-white text-xl font-light'>
-                    <div className="flex flex-col gap-10">
+                <div className={post.thirdParagraph !== '' ? 'flex flex-row items-bottom gap-20 bg-white text-xl font-light' : 'flex flex-col self-center gap-10 bg-white text-xl font-light w_400'}>
+                    <div className='flex flex-col gap-10'>
                         <div>
                             <h1 className='text-6xl text-gray-500'>{post.title}</h1>
-                            <p className='text-xl text-indigo-500'>{post.dDate} {date(post.dMonth)}, {post.dYear}</p>
+                            <p className='text-xl text-indigo-500 mt-4'>{post.dDate} {date(post.dMonth)}, {post.dYear}</p>
                         </div>
                         <p className='break-words object-contain text-gray-500'>{post.firstParagraph}</p>
                     </div>
                     <div className='flex flex-col justify-end gap-10'>
                         <p className='break-words object-contain text-gray-500'>{post.secondParagraph}</p>
-                        <p className='break-words object-contain text-gray-500'>{post.thirdParagraph}</p>
+                        {post.thirdParagraph !== '' ? (
+                            <>
+                                <p className='break-words object-contain text-gray-500'>{post.thirdParagraph}</p>
+                            </>
+                        ) : ''}
                     </div>
                 </div>
                 {currentUser && (
