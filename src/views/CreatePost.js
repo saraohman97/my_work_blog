@@ -93,7 +93,7 @@ const CreatePost = () => {
                         timestamp: serverTimestamp(),
                     })
                     toast.success('The post was successfylly updated!')
-                    navigate('/')
+                    navigate(-1)
 
                 } catch (err) {
                     console.log(err)
@@ -105,7 +105,7 @@ const CreatePost = () => {
                         timestamp: serverTimestamp(),
                     })
                     toast.success('The post was successfully created!')
-                    navigate('/')
+                    navigate(-1)
 
                 } catch (err) {
                     console.log(err)

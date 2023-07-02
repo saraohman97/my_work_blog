@@ -5,48 +5,12 @@ import { db } from '../firebase'
 import Header from '../components/Header'
 import Login from '../components/Login'
 import Post from '../components/Post'
+import { BsSearch } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
+import PostList from '../components/PostList'
 
 const Home = () => {
   const [openLogin, setOpenLogin] = useState(false)
-  const [posts, setPosts] = useState([])
-  const [loading, setLoading] = useState(false)
-
-  //read posts
-  useEffect(() => {
-    setLoading(true)
-    const q = query(collection(db, 'posts'))
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      let postsArr = []
-      querySnapshot.forEach((doc) => {
-        postsArr.push({ ...doc.data(), id: doc.id })
-      })
-      setPosts(postsArr)
-      return () => unsubscribe()
-    })
-    setLoading(false)
-  }, [])
-
-  // delete post
-  const handleDelete = async (id) => {
-    try {
-      setLoading(true)
-      await deleteDoc(doc(db, 'posts', id));
-      setLoading(false)
-    }
-    catch (err) {
-      console.log(err)
-    }
-  }
-
-  // edit post
-  // const getPostDetail = async () => {
-  //     const docRef = doc(db, "posts", post.id);
-  //     const snapshot = await getDoc(docRef);
-  //     if (snapshot.exists()) {
-  //         setForm({ ...snapshot.data() });
-  //     }
-  // }
-  // getPostDetail()
 
 
   return (
@@ -57,12 +21,11 @@ const Home = () => {
         <Login setOpenLogin={setOpenLogin} />
       )}
 
-      {loading && <p>Loading...</p>}
-      {!posts && <p>No posts</p>}
-      {posts?.map(post => (
-        <Post key={post.id} post={post} handleDelete={handleDelete} />
-      ))}
+      <PostList />
 
+      <Link to='/search' className='flex justify-center items-center fixed right-0 bg_pink top-36 rounded-s-full py-4 px-10'>
+        <BsSearch className='text-2xl' />
+      </Link>
     </div>
   )
 }
