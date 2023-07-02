@@ -4,7 +4,7 @@ import { db } from '../firebase';
 import Post from '../components/Post';
 import Footer from './Footer';
 
-const PostList = ({sQuery}) => {
+const PostList = ({ sQuery }) => {
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(false)
 

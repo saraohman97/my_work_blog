@@ -66,7 +66,7 @@ const Post = ({ post, handleDelete }) => {
                     </div>
                 )}
             </div>
-            {post.imgUrl && <img src={post.imgUrl} alt={post.title} className='mt-10 max-h-80 object-cover w-2/4 self-end max-md:w-full' />}
+            {post.imgUrl && <img src={post.imgUrl} alt={post.title} className='mt-20 max-h-96 object-cover w-2/4 self-end max-md:w-full' />}
         </div>
     )
 }
