@@ -119,11 +119,11 @@ const CreatePost = () => {
             {/* Navbar */}
             <Navbar />
 
-            <div className='relative'>
+            <div className='relative overflow-hidden'>
                 <img src={AdminImg} className='absolute top-44 right-0' alt="" />
                 <div className="container mx-auto mb-20">
                     {/* form */}
-                    <form onSubmit={handleSubmit} className='mx-36 py-14 px-20 bg-gray-100 rounded-2xl opacity-80 flex flex-col items-center'>
+                    <form onSubmit={handleSubmit} className='mx-36 max-xl:mx-0 py-14 px-20 max-lg:px-4 bg-gray-100 rounded-2xl opacity-80 flex flex-col items-center'>
                         <h3 className='self-start text-indigo-500 font-bold text-xl mb-4'>{id ? 'Update a post' : 'Create a post'}</h3>
                         <div className='flex flex-wrap w-full gap-10'>
 

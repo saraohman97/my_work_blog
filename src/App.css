@@ -5,6 +5,7 @@
 html,
 body {
     transition: all 1s;
+    overflow-x: hidden;
 }
 
 .bg_pink {

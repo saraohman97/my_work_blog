@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 
 const Header = ({ setOpenLogin }) => {
   return (
-    <div className='h-screen container mx-auto mb-20 max-md:mb-0'>
+    <div className='h-screen container mx-auto mb-20 max-md:mb-10 overflow-hidden'>
       <Navbar />
 
       <div className='flex items-center h-3/4 max-md:flex-col-reverse max-md:gap-8'>

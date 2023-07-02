@@ -17,7 +17,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className='my-14 flex justify-between container mx-auto max-md:mx-4'>
+    <div className='overflow-hidden my-14 flex justify-between container mx-auto max-md:mx-4'>
       <Link to='/' className='cursor-pointer'>
         <h2 className='text-indigo-500 text-2xl'>Workblog</h2>
         <h4 className='text-lg text-gray-400'>Frontend Developer</h4>
