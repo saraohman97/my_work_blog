@@ -3,7 +3,7 @@ import { collection, deleteDoc, doc, onSnapshot, query } from 'firebase/firestor
 import { db } from '../firebase';
 import Post from '../components/Post';
 
-const PostList = () => {
+const PostList = ({sQuery}) => {
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(false)
 
@@ -38,9 +38,11 @@ const PostList = () => {
         <>
             {loading && <p>Loading...</p>}
             {!posts && <p>No posts</p>}
-            {posts?.map(post => (
-                <Post key={post.id} post={post} handleDelete={handleDelete} />
-            ))}
+            {posts && posts
+                .filter((post) => post.title.toLowerCase().includes(sQuery))
+                .map(post => (
+                    <Post key={post.id} post={post} handleDelete={handleDelete} />
+                ))}
         </>
     )
 }

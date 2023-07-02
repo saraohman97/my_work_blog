@@ -1,14 +1,11 @@
-import { deleteDoc, doc, getDoc } from '@firebase/firestore';
 import React, { useContext } from 'react'
-import { BsFillTrash3Fill } from 'react-icons/bs';
-import { db } from '../firebase';
-import { GrEdit } from 'react-icons/gr';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { BsFillTrash3Fill } from 'react-icons/bs';
+import { GrEdit } from 'react-icons/gr';
 
 const Post = ({ post, handleDelete }) => {
     const { currentUser } = useContext(AuthContext)
-    const navigate = useNavigate()
 
     const date = () => {
         if (post.dMonth === 1) {
