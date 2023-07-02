@@ -38,7 +38,7 @@ const Post = ({ post, handleDelete }) => {
     }
 
     return (
-        <div className='mb-60 flex flex-col'>
+        <div className='mb-60 post_image'>
             <div key={post.id} className='bg-white px-40 max-h-fit place-content-end w-full flex flex-col rounded-xl container mx-auto'>
                 <div className={post.thirdParagraph !== '' ? 'flex flex-row items-bottom gap-20 bg-white text-xl font-light' : 'flex flex-col self-center gap-10 bg-white text-xl font-light w_400'}>
                     <div className='flex flex-col gap-10'>
@@ -66,7 +66,7 @@ const Post = ({ post, handleDelete }) => {
                     </div>
                 )}
             </div>
-            {post.imgUrl && <img src={post.imgUrl} alt={post.title} className='mt-10 max-h-80 object-cover w-2/4 [&>*:nth-child(odd)]:self-end [&>*:nth-child(even)]:self-start' />}
+            {post.imgUrl && <img src={post.imgUrl} alt={post.title} className='mt-10 max-h-80 object-cover w-2/4 self-end' />}
         </div>
     )
 }

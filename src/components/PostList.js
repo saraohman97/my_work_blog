@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { collection, deleteDoc, doc, onSnapshot, query } from 'firebase/firestore';
 import { db } from '../firebase';
 import Post from '../components/Post';
+import Footer from './Footer';
 
 const PostList = ({sQuery}) => {
     const [posts, setPosts] = useState([])
@@ -43,6 +44,7 @@ const PostList = ({sQuery}) => {
                 .map(post => (
                     <Post key={post.id} post={post} handleDelete={handleDelete} />
                 ))}
+            <Footer />
         </>
     )
 }

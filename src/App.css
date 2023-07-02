@@ -14,3 +14,8 @@ body {
 .w_400 {
     width: 450px;
 }
+
+.post_image:nth-child(odd) {
+    display: flex;
+    flex-direction: column;
+}

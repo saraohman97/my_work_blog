@@ -12,7 +12,7 @@ const Navbar = () => {
     signOut(auth).then(() => {
       dispatch({ type: "LOGOUT", payload: currentUser })
     }).catch((error) => {
-      console.log('error')
+      console.log(error)
     });
   }
 
