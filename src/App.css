@@ -19,3 +19,9 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+@media screen and (max-width: 500px ) {
+    .w_400 {
+        width: auto;
+    }
+}

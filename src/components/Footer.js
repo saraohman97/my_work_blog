@@ -5,20 +5,15 @@ const Footer = () => {
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-      };
+    };
 
     return (
         <div
-            className='bg_pink w-full flex justify-between items-center px-20 py-4'
+            className='w-full flex justify-center gap-4 items-center px-20 py-4 cursor-pointer border border-gray-400'
             onClick={scrollToTop}
         >
-            <HiArrowLongUp className='text-xl' />
-            <HiArrowLongUp className='text-xl' />
-            <HiArrowLongUp className='text-xl' />
-            <p>Click to get to the top (not career-wise)</p>
-            <HiArrowLongUp className='text-xl' />
-            <HiArrowLongUp className='text-xl' />
-            <HiArrowLongUp className='text-xl' />
+            <p>Click to get to the top</p>
+            <HiArrowLongUp />
         </div>
     )
 }
