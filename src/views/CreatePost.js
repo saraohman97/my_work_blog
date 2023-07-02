@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import AdminImg from '../images/undraw_hero.svg'
-import { addDoc, collection, serverTimestamp } from '@firebase/firestore'
+import { addDoc, collection, serverTimestamp, doc, getDoc, updateDoc } from '@firebase/firestore'
 import { getDownloadURL, ref, uploadBytesResumable } from '@firebase/storage'
 import { db, storage } from '../firebase'
 import Navbar from '../components/Navbar'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const CreatePost = () => {
     const navigate = useNavigate()
@@ -56,6 +57,23 @@ const CreatePost = () => {
     }, [file])
 
 
+    //edit post
+    const { id } = useParams()
+
+    useEffect(() => {
+        id && getPostDetail();
+    }, [id])
+
+    const getPostDetail = async () => {
+        const docRef = doc(db, 'posts', id);
+        const snapshot = await getDoc(docRef);
+        if (snapshot.exists()) {
+            setForm({ ...snapshot.data() })
+        }
+        // navigate('/')
+    }
+
+
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     }
@@ -65,29 +83,36 @@ const CreatePost = () => {
 
         if (form.title === '' || form.firstParagraph === '') {
             setError(true)
-            return
         } else {
             setError(false)
-        }
-        try {
-            await addDoc(collection(db, 'posts'), {
-                ...form,
-                timestamp: serverTimestamp(),
-            })
-            // setForm({
-            //     title: "",
-            //     firstParagraph: "",
-            //     secondParagraph: "",
-            //     thirdParagraph: ""
-            // })
 
-            //Reload page just for clean file input...
-            // window.location.reload(false);
-            navigate('/')
+            if (!id) {
+                try {
+                    await addDoc(collection(db, 'posts'), {
+                        ...form,
+                        timestamp: serverTimestamp(),
+                    })
+                    toast.success('The post was successfylly updated!')
+                    navigate('/')
 
-        } catch (err) {
-            console.log(err)
+                } catch (err) {
+                    console.log(err)
+                }
+            } else {
+                try {
+                    await updateDoc(doc(db, 'posts', id), {
+                        ...form,
+                        timestamp: serverTimestamp(),
+                    })
+                    toast.success('The post was successfully created!')
+                    navigate('/')
+
+                } catch (err) {
+                    console.log(err)
+                }
+            }
         }
+
     }
 
     return (
@@ -100,7 +125,7 @@ const CreatePost = () => {
                 <div className="container mx-auto mb-20">
                     {/* form */}
                     <form onSubmit={handleSubmit} className='mx-36 py-14 px-20 bg-gray-100 rounded-2xl opacity-80 flex flex-col items-center'>
-                        <h3 className='self-start text-indigo-500 font-bold text-xl mb-4'>Create a post</h3>
+                        <h3 className='self-start text-indigo-500 font-bold text-xl mb-4'>{id ? 'Update a post' : 'Create a post'}</h3>
                         <div className='flex flex-wrap w-full gap-10'>
 
                             <div className="flex flex-col gap-10 flex-1">
@@ -157,7 +182,11 @@ const CreatePost = () => {
                         </div>
 
                         {error && <span className='text-red-500 mt-4'>Post must contain a title and a first paragraph.</span>}
-                        <button className='hover:text-gray-500 hover:bg-white border border-3 rounded hover:border-gray-400 p-3 w-60 mt-6 border-indigo-500 bg-indigo-500 text-white'>Post</button>
+                        <button
+                            disabled={progress !== null && progress < 100}
+                            className='hover:text-gray-500 hover:bg-white border border-3 rounded hover:border-gray-400 p-3 w-60 mt-6 border-indigo-500 bg-indigo-500 text-white'>
+                            {id ? 'Update' : 'Post'}
+                        </button>
                     </form>
                 </div>
             </div>
