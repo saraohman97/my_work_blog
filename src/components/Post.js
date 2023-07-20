@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { BsFillTrash3Fill } from 'react-icons/bs';
@@ -6,6 +6,7 @@ import { GrEdit } from 'react-icons/gr';
 
 const Post = ({ post, handleDelete }) => {
     const { currentUser } = useContext(AuthContext)
+    const [deletePopup, setDeletePopup] = useState(false)
 
     const date = () => {
         if (post.dMonth === 1) {
@@ -59,7 +60,22 @@ const Post = ({ post, handleDelete }) => {
                 </div>
                 {currentUser && (
                     <div className='self-end mt-4 flex gap-4'>
-                        <BsFillTrash3Fill onClick={() => handleDelete(post.id)} className='text-red-500 text-2xl cursor-pointer' />
+                        <BsFillTrash3Fill onClick={() => setDeletePopup(true)} className='text-red-500 text-2xl cursor-pointer' />
+                        {deletePopup && (
+                            <div className='fixed inset-0 flex items-center justify-center'>
+                                <div className="fixed bg-gray-500 bg-opacity-75 transition-opacity inset-0" onClick={() => setDeletePopup(false)} />
+
+                                <div className=' w-96 h-96 p-10 bg-white shadow flex flex-col items-center justify-center gap-10 z-50 rounded-lg relative m-4 max-md:h-auto'>
+                                    <div onClick={() => setDeletePopup(false)} className="text-gray-200 text-xl w-8 h-8 rounded-full hover:bg-gray-50 cursor-pointer flex items-center justify-center absolute right-4 top-4">X</div>
+
+                                    <h3 className='text-indigo-500 text-xl font-bold text-center'>Are you sure you want to delete?</h3>
+                                    <div className='flex gap-4 w-full'>
+                                        <button onClick={() => setDeletePopup(false)} className='text-gray-500 border border-3 rounded border-gray-400 p-3 w-full mt-6 hover:border-indigo-500 hover:bg-indigo-500 hover:text-white flex-1'>No</button>
+                                        <button onClick={() => handleDelete(post.id)} className='self-center hover:bg-indigo-600 border border-3 rounded p-3 w-full mt-6 border-indigo-500 bg-indigo-500 text-white font-bold flex-1'>Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                         <Link to={'/create/' + post.id}>
                             <GrEdit className='text-red-500 text-2xl cursor-pointer' />
                         </Link>

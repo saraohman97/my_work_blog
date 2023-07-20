@@ -17,7 +17,7 @@ const CreatePost = () => {
         secondParagraph: "",
         thirdParagraph: "",
         dDate: date.getDate(),
-        dMonth: date.getMonth(),
+        dMonth: date.getMonth() + 1,
         dYear: date.getFullYear(),
     })
 
