@@ -9,29 +9,29 @@ const Post = ({ post, handleDelete }) => {
 
     const date = () => {
         if (post.dMonth === 1) {
-            return 'januari'
+            return 'January'
         } else if (post.dMonth === 2) {
-            return 'februari'
+            return 'February'
         } else if (post.dMonth === 3) {
-            return 'mars'
+            return 'March'
         } else if (post.dMonth === 4) {
-            return 'april'
+            return 'April'
         } else if (post.dMonth === 5) {
-            return 'maj'
+            return 'May'
         } else if (post.dMonth === 6) {
-            return 'juni'
+            return 'June'
         } else if (post.dMonth === 7) {
-            return 'juli'
+            return 'July'
         } else if (post.dMonth === 8) {
-            return 'augusti'
+            return 'August'
         } else if (post.dMonth === 9) {
-            return 'september'
+            return 'September'
         } else if (post.dMonth === 10) {
-            return 'oktober'
+            return 'October'
         } else if (post.dMonth === 11) {
-            return 'november'
+            return 'November'
         } else if (post.dMonth === 12) {
-            return 'december'
+            return 'December'
         } else {
             return post.dMonth
         }
@@ -44,7 +44,7 @@ const Post = ({ post, handleDelete }) => {
                     <div className='flex flex-col gap-10'>
                         <div>
                             <h1 className='text-6xl text-gray-500 max-md:text-4xl'>{post.title}</h1>
-                            <p className='text-xl text-indigo-500 mt-4'>{post.dDate} {date(post.dMonth)}, {post.dYear}</p>
+                            <p className='text-xl text-indigo-500 mt-4'>{date(post.dMonth)} {post.dDate}, {post.dYear}</p>
                         </div>
                         <p className='break-words object-contain text-gray-500'>{post.firstParagraph}</p>
                     </div>
